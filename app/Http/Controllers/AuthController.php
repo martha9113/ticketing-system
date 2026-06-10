@@ -9,6 +9,10 @@ class AuthController extends Controller
 {
     public function showLogin()
     {
+        if (Auth::check()) {
+            return redirect()->route('dashboard');
+        }
+
         return view('auth.login');
     }
 
@@ -19,9 +23,15 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+            return back()->withErrors([
+                'email' => 'These credentials do not match our records.',
+            ])->onlyInput('email');
+        }
+
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard');
+        return redirect()->intended(route('dashboard'));
     }
 
     public function logout(Request $request)

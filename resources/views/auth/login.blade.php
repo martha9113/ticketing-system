@@ -32,9 +32,14 @@
                     id="email"
                     name="email"
                     placeholder="Enter email"
+                    value="{{ old('email') }}"
                     required
-                    class="login-input"
+                    class="login-input {{ $errors->has('email') ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : '' }}"
                 >
+
+                @error('email')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <!-- Password -->
@@ -49,8 +54,12 @@
                     name="password"
                     placeholder="Enter password"
                     required
-                    class="login-input"
+                    class="login-input {{ $errors->has('password') ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : '' }}"
                 >
+
+                @error('password')
+                    <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                @enderror
             </div>
 
             <!-- Show Password -->
