@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('ticket_id')->unique();
             $table->string('title');
             $table->text('description');
-            $table->foreignId('issuer_id')->constrained();
+            $table->foreignId('issuer_id')->constrained('users');
             $table->date('date');
             $table->string('status')->default('open');
             $table->string('priority')->default('medium');
-            $table->foreignId('assigned_to')->nullable()->constrained();
+            $table->foreignId('assigned_to')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

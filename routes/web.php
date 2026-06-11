@@ -25,7 +25,11 @@ Route::middleware('auth')->group(function () {
     })->name('developer.workspace');
 
     Route::get('/ticket/create', [TicketController::class, 'create'])->name('tickets.create');
-    Route::get('/tickets/create', [TicketController::class, 'create']);
+
+    Route::post('/ticket', [TicketController::class, 'store'])->name('tickets.store');
+    Route::get('/ticketlist', [TicketController::class, 'index'])->name('ticketlist.index');
+    Route::put('/ticket/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
+    Route::delete('/ticket/{ticket}', [TicketController::class, 'destroy'])->name('tickets.destroy');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
